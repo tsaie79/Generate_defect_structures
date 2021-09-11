@@ -73,7 +73,8 @@ class Tools:
 
 class GenDefect:
     """
-
+    Generate defect structures including vacancies and substitutions.
+    Combining with some features including adding vacuum, distortion, and standraizing structure.
     """
     def __init__(self, orig_st, defect_type, natom, vacuum_thickness=None, distort=None, sub_on_side=None, standardize_st=True):
         """
