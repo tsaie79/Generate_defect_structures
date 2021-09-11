@@ -73,25 +73,19 @@ class Tools:
 
 class GenDefect:
     """
-    orig_st: host material (pymatgen Structure)
-    defect_type: (defect_type(str), defect_index(int))
-        defect = ChargedDefectsStructures(pc, antisites_flag=True).defects; defect[defect_type][defect_index]["name"]
-    natom: number of atoms of supercell without defect
-    vacuum_thickness: [vacuum thickness (float)] (list of float)
-    distort: randomly move defct and its adjacent atoms by distance Å (float)
-    sub_on_side: make substitution of one of the adjacent atoms (list of str e.g. ["C"])
-    standardize_st: phonopy structure, necessary for reading IR (Boolean)
+
     """
     def __init__(self, orig_st, defect_type, natom, vacuum_thickness=None, distort=None, sub_on_side=None, standardize_st=True):
         """
 
-        :param orig_st:
-        :param defect_type:
-        :param natom:
-        :param vacuum_thickness:
-        :param distort:
-        :param sub_on_side:
-        :param standardize_st:
+        :param orig_st: host material (pymatgen Structure)
+        :param defect_type:(defect_type(str), defect_index(int))
+            defect = ChargedDefectsStructures(pc, antisites_flag=True).defects; defect[defect_type][defect_index]["name"]
+        :param natom: number of atoms of supercell without defect
+        :param vacuum_thickness: [vacuum thickness (float)] (list of float)
+        :param distort: randomly move defct and its adjacent atoms by distance Å (float)
+        :param sub_on_side: make substitution of one of the adjacent atoms (list of str e.g. ["Si"])
+        :param standardize_st: phonopy structure, necessary for reading IR (Boolean)
         """
         for site_property in orig_st.site_properties:
             orig_st.remove_site_property(site_property)
@@ -256,7 +250,9 @@ if __name__ == '__main__':
         natom=na,
         vacuum_thickness=thick,
         sub_on_side=None,
-        distort=0
+        distort=0,
+        standardize_st=False
     )
 
     vacancy = antisite_st.defect_st
+    defect_entry_from_pycdt = antisite_st.defect_entry
